@@ -354,13 +354,13 @@ def collisioncheck(rect, data):
 
     return False
 
-def match(saved, i, lower):
+def match(saved, i):
     for j in saved:
         for k in j[1]:
             if k[1] == i * 20 + 90:
                 k[1] = 1000
             elif k[1] < i * 20 + 90:
-                k[1] += 20 * lower[int((k[0]-150)/20)]
+                k[1] += 20 
     return saved
 
 #####################################################################
@@ -466,14 +466,8 @@ while True:
                     break
 
                 if data[i] == [1,1,1,1,1,1,1,1,1,1]:
-                    lower = [1,1,1,1,1,1,1,1,1,1]
                     scoreint += 10
-                    for j in range(10):
-                        for k in range(i+1, 20):
-                            if data[k][j] == 0:
-                                lower[j] += 1
-                            else : break
-                    saved = match(saved, i, lower)
+                    saved = match(saved, i)
                     for j in range(20):
                         for k in range(10):
                             data[j][k] = 0
@@ -537,16 +531,9 @@ while True:
                         for i in range(20):
                             if Game == False:
                                 break
-
                             if data[i] == [1,1,1,1,1,1,1,1,1,1]:
-                                lower = [1,1,1,1,1,1,1,1,1,1]
                                 scoreint += 10
-                                for j in range(10):
-                                    for k in range(i+1, 20):
-                                        if data[k][j] == 0:
-                                            lower[j] += 1
-                                        else : break
-                                saved = match(saved, i, lower)
+                                saved = match(saved, i)
                                 for j in range(20):
                                     for k in range(10):
                                         data[j][k] = 0
@@ -630,5 +617,4 @@ while True:
                 blip(i[0], i[1])
             blip(id, rect)
         pygame.display.flip()
-        pygame.time.wait(400)
-        clock.tick(10)  
+        clock.tick(3)  
